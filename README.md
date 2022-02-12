@@ -1,2 +1,2 @@
 # static-file-admin
-Administrador de archivos que sirve de recursos a la pagina personal
+Jakarta Server Faces App to admin static files used in personal web page
