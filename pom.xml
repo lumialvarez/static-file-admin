@@ -105,6 +105,11 @@
     <repositories>
         <repository>
             <id>central</id>
+            <name>Maven Plugin Repository</name>
+            <url>https://repo1.maven.org/maven2</url>
+        </repository>
+        <repository>
+            <id>lmalvarez.jfrog</id>
             <name>default-maven-local</name>
             <url>https://lmalvarez.jfrog.io/artifactory/default-maven-local</url>
         </repository>
