@@ -26,7 +26,7 @@ pipeline {
 		}
 		stage('Deploy') {
 			steps {
-				sh 'mvn tomcat7:deploy -s /var/jenkins_home/settings.tomcat.xml'
+				sh 'mvn tomcat7:deploy -DskipTests -s /var/jenkins_home/settings.tomcat.xml'
 			}
 		}
 	}
