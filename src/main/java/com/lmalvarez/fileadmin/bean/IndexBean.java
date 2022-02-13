@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.lumialvarez.jsf.bean;
+package com.lmalvarez.fileadmin.bean;
 
-import com.lumialvarez.jsf.model.FileItem;
-import com.lumialvarez.jsf.utils.Utils;
+import com.lmalvarez.fileadmin.utils.Utils;
+import com.lmalvarez.fileadmin.model.FileItem;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.application.FacesMessage;
@@ -20,7 +20,6 @@ import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 import org.primefaces.event.FileUploadEvent;
-import org.primefaces.event.FilesUploadEvent;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 import org.primefaces.model.file.UploadedFile;

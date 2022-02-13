@@ -1,4 +1,4 @@
-package com.lumialvarez.jsf.model;
+package com.lmalvarez.fileadmin.model;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -1,7 +1,7 @@
-package com.lumialvarez.jsf.utils;
+package com.lmalvarez.fileadmin.utils;
 
-import com.lumialvarez.jsf.model.FileItem;
-import com.lumialvarez.tools.system.OperativeSystem;
+import com.lmalvarez.tools.system.OperativeSystem;
+import com.lmalvarez.fileadmin.model.FileItem;
 import org.apache.commons.io.FileUtils;
 
 import java.io.*;
