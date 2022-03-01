@@ -4,7 +4,12 @@ Static files manager
 
 ## [Unreleased]
 - Preview images
-- Authentication
+- Manual authentication
+- Dynamic parameters
+
+## [1.1.0] - 12/02/2022
+### Added
+- Authentication with token
 
 ## [1.0.0] - 12/02/2022
 ### Added

@@ -5,6 +5,8 @@
  */
 package com.lmalvarez.fileadmin.bean;
 
+import com.lmalvarez.fileadmin.model.User;
+import com.lmalvarez.fileadmin.service.Session;
 import com.lmalvarez.fileadmin.utils.Utils;
 import com.lmalvarez.fileadmin.model.FileItem;
 import jakarta.annotation.PostConstruct;
@@ -17,6 +19,8 @@ import jakarta.inject.Named;
 import java.io.*;
 import java.nio.file.FileSystems;
 import java.util.List;
+
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.Getter;
 import lombok.Setter;
 import org.primefaces.event.FileUploadEvent;
@@ -33,6 +37,8 @@ import org.primefaces.model.file.UploadedFile;
 @Getter
 @Setter
 public class IndexBean implements Serializable {
+    private String tokenParam;
+    private User user;
     private String currentPath;
     private List<FileItem> list;
     private FileItem currentFile;
@@ -43,6 +49,16 @@ public class IndexBean implements Serializable {
     public void init() {
         currentPath = Utils.MAIN_PATH;
         list = Utils.readFolder(currentPath);
+        user = new User();
+    }
+
+    public void onPageLoad(){
+        if(tokenParam != null && !tokenParam.isEmpty() && !tokenParam.equalsIgnoreCase(user.getToken())) {
+            user = Session.checkToken(tokenParam);
+            if(!user.isLogged()){
+                showWarn("Token invalido");
+            }
+        }
     }
 
     public boolean isCarpetaPrincipal(){
@@ -153,5 +169,21 @@ public class IndexBean implements Serializable {
 
     public void setNameNewFolder(String nameNewFolder) {
         this.nameNewFolder = nameNewFolder;
+    }
+
+    public String getTokenParam() {
+        return tokenParam;
+    }
+
+    public void setTokenParam(String tokenParam) {
+        this.tokenParam = tokenParam;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

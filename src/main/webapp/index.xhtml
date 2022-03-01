@@ -2,7 +2,13 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <f:metadata>
+        <f:viewAction action="#{indexBean.onPageLoad}" />
+        <f:viewParam name="token" value="#{indexBean.tokenParam}"/>
+    </f:metadata>
 
     <h:head>
         <title>Static Files Manager</title>
@@ -10,58 +16,60 @@
 
     <h:body>
         <h:form>
-            <p:growl id="messages" showDetail="true"/>
+            <h:panelGroup rendered="#{indexBean.user.logged}">
+                <p:growl id="messages" showDetail="true"/>
 
-            <p:commandButton value="Atras" id="btn_atras" actionListener="#{indexBean.cargarRutaAtras}" ajax="@form" icon="pi pi-caret-up" disabled="#{indexBean.carpetaPrincipal}"/>
-            <p:commandButton value="Nueva Carpeta" id="btn_nueva_carpeta" onclick="PF('new_folder_dialog').show()" icon="pi pi-folder"/>
-            <p:fileUpload listener="#{indexBean.handleFilesUpload}" mode="advanced" multiple="true"  fileLimit="100"
-                          update="@form" auto="true" sizeLimit="10000000000000000"/>
+                <p:commandButton value="Atras" id="btn_atras" actionListener="#{indexBean.cargarRutaAtras}" ajax="@form" icon="pi pi-caret-up" disabled="#{indexBean.carpetaPrincipal}"/>
+                <p:commandButton value="Nueva Carpeta" id="btn_nueva_carpeta" onclick="PF('new_folder_dialog').show()" icon="pi pi-folder"/>
+                <p:fileUpload listener="#{indexBean.handleFilesUpload}" mode="advanced" multiple="true"  fileLimit="100"
+                              update="@form" auto="true" sizeLimit="10000000000000000"/>
 
-            <p:dataTable id="dt_names" value="#{indexBean.list}" var="e">
-                <p:column headerText="Nombre">
-                    <h:panelGroup rendered="#{e.folder}">
-                        <p:commandLink actionListener="#{indexBean.cargarRuta(e.absolutePath)}" update="@form">
-                            <i class="pi pi-folder-open"></i> <h:outputText value="#{e.fileName}"/>
-                        </p:commandLink>
-                    </h:panelGroup>
-                    <h:panelGroup rendered="#{!e.folder}">
-                        <i class="pi pi-file"></i> <h:outputText value="#{e.fileName}"/>
-                    </h:panelGroup>
-                </p:column>
+                <p:dataTable id="dt_names" value="#{indexBean.list}" var="e">
+                    <p:column headerText="Nombre">
+                        <h:panelGroup rendered="#{e.folder}">
+                            <p:commandLink actionListener="#{indexBean.cargarRuta(e.absolutePath)}" update="@form">
+                                <i class="pi pi-folder-open"></i> <h:outputText value="#{e.fileName}"/>
+                            </p:commandLink>
+                        </h:panelGroup>
+                        <h:panelGroup rendered="#{!e.folder}">
+                            <i class="pi pi-file"></i> <h:outputText value="#{e.fileName}"/>
+                        </h:panelGroup>
+                    </p:column>
 
-                <p:column headerText="Peso">
-                    <h:outputText value="#{e.size} bytes"/>
-                </p:column>
+                    <p:column headerText="Peso">
+                        <h:outputText value="#{e.size} bytes"/>
+                    </p:column>
 
-                <p:column headerText="Ruta">
-                    <h:outputText value="#{e.relativePath}"/>
-                </p:column>
+                    <p:column headerText="Ruta">
+                        <h:outputText value="#{e.relativePath}"/>
+                    </p:column>
 
-                <p:column headerText="Detalles">
-                    <p:commandButton value="Details" actionListener="#{indexBean.seleccionarArchivo(e)}" update="details_dialog"
-                                     icon="pi pi-external-link" oncomplete="PF('details_dialog').show()"
-                                     rendered="#{!e.folder}">
-                    </p:commandButton>
-                </p:column>
+                    <p:column headerText="Detalles">
+                        <p:commandButton value="Details" actionListener="#{indexBean.seleccionarArchivo(e)}" update="details_dialog"
+                                         icon="pi pi-external-link" oncomplete="PF('details_dialog').show()"
+                                         rendered="#{!e.folder}">
+                        </p:commandButton>
+                    </p:column>
 
-                <p:column headerText="Descargar">
-                    <p:commandButton value="Download" ajax="false" icon="pi pi-arrow-down" rendered="#{!e.folder}">
-                        <p:fileDownload value="#{indexBean.getDownloadValue(e.absolutePath)}"/>
-                    </p:commandButton>
-                </p:column>
+                    <p:column headerText="Descargar">
+                        <p:commandButton value="Download" ajax="false" icon="pi pi-arrow-down" rendered="#{!e.folder}">
+                            <p:fileDownload value="#{indexBean.getDownloadValue(e.absolutePath)}"/>
+                        </p:commandButton>
+                    </p:column>
 
-                <p:column>
-                    <p:commandButton value="Delete" actionListener="#{indexBean.eliminarArchivo(e)}" update="@form"
-                                     styleClass="ui-button-danger" icon="pi pi-trash">
-                        <p:confirm type="popup" header="Confirmation" message="Do you want to delete this file?" icon="pi pi-exclamation-triangle"/>
-                    </p:commandButton>
-                </p:column>
-            </p:dataTable>
+                    <p:column>
+                        <p:commandButton value="Delete" actionListener="#{indexBean.eliminarArchivo(e)}" update="@form"
+                                         styleClass="ui-button-danger" icon="pi pi-trash">
+                            <p:confirm type="popup" header="Confirmation" message="Do you want to delete this file?" icon="pi pi-exclamation-triangle"/>
+                        </p:commandButton>
+                    </p:column>
+                </p:dataTable>
 
-            <p:confirmPopup global="true">
-                <p:commandButton value="No" type="button" styleClass="ui-confirm-popup-no ui-button-flat"/>
-                <p:commandButton value="Yes" type="button" styleClass="ui-confirm-popup-yes" />
-            </p:confirmPopup>
+                <p:confirmPopup global="true">
+                    <p:commandButton value="No" type="button" styleClass="ui-confirm-popup-no ui-button-flat"/>
+                    <p:commandButton value="Yes" type="button" styleClass="ui-confirm-popup-yes" />
+                </p:confirmPopup>
+            </h:panelGroup>
         </h:form>
 
         <p:dialog id="details_dialog" header="Detalles" widgetVar="details_dialog" minHeight="40" width="350" showEffect="fade" modal="true">

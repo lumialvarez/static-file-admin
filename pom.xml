@@ -4,7 +4,7 @@
 
     <groupId>com.lmalvarez</groupId>
     <artifactId>static-file-admin</artifactId>
-    <version>1.0.0</version>
+    <version>1.1.0</version>
     <packaging>war</packaging>
 
     <name>static-file-admin</name>
@@ -60,7 +60,12 @@
         <dependency>
             <groupId>com.lmalvarez</groupId>
             <artifactId>Tools</artifactId>
-            <version>1.0.0</version>
+            <version>1.2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20211205</version>
         </dependency>
         <!-- Tests -->
         <dependency>
