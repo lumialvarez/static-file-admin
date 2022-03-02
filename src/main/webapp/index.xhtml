@@ -16,13 +16,16 @@
 
     <h:body>
         <h:form>
+            <p:growl id="messages" showDetail="true"/>
             <h:panelGroup rendered="#{indexBean.user.logged}">
-                <p:growl id="messages" showDetail="true"/>
-
                 <p:commandButton value="Atras" id="btn_atras" actionListener="#{indexBean.cargarRutaAtras}" ajax="@form" icon="pi pi-caret-up" disabled="#{indexBean.carpetaPrincipal}"/>
                 <p:commandButton value="Nueva Carpeta" id="btn_nueva_carpeta" onclick="PF('new_folder_dialog').show()" icon="pi pi-folder"/>
                 <p:fileUpload listener="#{indexBean.handleFilesUpload}" mode="advanced" multiple="true"  fileLimit="100"
                               update="@form" auto="true" sizeLimit="10000000000000000"/>
+
+                <div class="card">
+                    <h:outputText value="Ruta actual: #{indexBean.rutaRelativa}"></h:outputText>
+                </div>
 
                 <p:dataTable id="dt_names" value="#{indexBean.list}" var="e">
                     <p:column headerText="Nombre">

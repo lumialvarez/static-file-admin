@@ -32,14 +32,14 @@ public class Utils {
         List<FileItem> list = new ArrayList<>();
         File folder = new File(path);
         folder.getPath();
-        File rootFolder = new File(MAIN_PATH);
+
 
         for (final File fileEntry : folder.listFiles()) {
             FileItem fileItem = new FileItem();
             if (fileEntry.isDirectory()) {
                 fileItem.setFolder(true);
                 fileItem.setFileName(fileEntry.getName());
-                fileItem.setRelativePath(fileEntry.getPath().replace(rootFolder.getPath(), ""));
+                fileItem.setRelativePath(findRelativeURL(fileEntry));
                 try {
                     fileItem.setSize(folderSize(fileEntry));
                 } catch (Exception ex){
@@ -49,7 +49,7 @@ public class Utils {
             } else {
                 fileItem.setFolder(false);
                 fileItem.setFileName(fileEntry.getName());
-                fileItem.setRelativePath(fileEntry.getPath().replace(rootFolder.getPath(), ""));
+                fileItem.setRelativePath(findRelativeURL(fileEntry));
                 fileItem.setUrl(findAbsoluteWebURL(fileEntry.getPath()));
                 fileItem.setSize(FileUtils.sizeOf(fileEntry));
                 fileItem.setAbsolutePath(fileEntry.getPath());
@@ -57,6 +57,15 @@ public class Utils {
             list.add(fileItem);
         }
         return list;
+    }
+
+    public static String findRelativeURL(String filePath){
+        return findRelativeURL(new File(filePath));
+    }
+
+    private static String findRelativeURL(File file){
+        File rootFolder = new File(MAIN_PATH);
+        return file.getPath().replace(rootFolder.getPath(), "");
     }
 
     private static String findAbsoluteWebURL(String path){

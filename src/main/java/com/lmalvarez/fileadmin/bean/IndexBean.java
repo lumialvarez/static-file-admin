@@ -59,10 +59,18 @@ public class IndexBean implements Serializable {
                 showWarn("Token invalido");
             }
         }
+        if(!user.isLogged()){
+            showWarn("Contenido no permitido");
+        }
     }
 
     public boolean isCarpetaPrincipal(){
         return Utils.isRootPath(currentPath);
+    }
+
+    public String getRutaRelativa(){
+        String ruta = Utils.findRelativeURL(currentPath);
+        return ruta.isEmpty()? FileSystems.getDefault().getSeparator() : ruta;
     }
 
     public void cargarRuta(String path){
