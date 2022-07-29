@@ -19,7 +19,7 @@ pipeline {
 		}
 		stage('Test') {
 			steps {	
-				sh 'mvn clean test'
+				sh 'mvn clean test -s /var/jenkins_home/settings.maven.xml'
 			}
 			post {
 				success {
@@ -29,17 +29,17 @@ pipeline {
 		}
 		stage('Build') {
 			steps {
-				sh 'mvn clean package -DskipTests'
+				sh 'mvn clean package -DskipTests -s /var/jenkins_home/settings.maven.xml'
 			}
 		}
 		stage('Undeploy') {
 			steps {
-				sh 'mvn tomcat7:undeploy -s /var/jenkins_home/settings.tomcat.xml'
+				sh 'mvn tomcat7:undeploy -s /var/jenkins_home/settings.maven.xml'
 			}
 		}
 		stage('Deploy') {
 			steps {
-				sh 'mvn tomcat7:deploy -DskipTests -s /var/jenkins_home/settings.tomcat.xml'
+				sh 'mvn tomcat7:deploy -DskipTests -s /var/jenkins_home/settings.maven.xml'
 			}
 		}
 	}

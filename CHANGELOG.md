@@ -7,6 +7,10 @@ Static files manager
 - Manual authentication
 - Dynamic parameters
 
+## [1.2.1] - 01/03/2022
+### Fixed
+- Change package repository configuration
+
 ## [1.2.0] - 01/03/2022
 ### Added
 - Current folder label
