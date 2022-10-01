@@ -1,11 +1,15 @@
 # Changelog
 Static files manager
 
-
 ## [Unreleased]
 - Preview images
 - Manual authentication
-- Dynamic parameters
+- Dynamic configurations
+
+## [1.2.2] - 30/09/2022
+### Fixed
+- Change of session check endpoint
+- Code format
 
 ## [1.2.1] - 01/03/2022
 ### Fixed

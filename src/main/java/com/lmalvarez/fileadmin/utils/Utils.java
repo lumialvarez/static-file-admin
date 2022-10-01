@@ -59,7 +59,7 @@ public class Utils {
         return list;
     }
 
-    public static String findRelativeURL(String filePath){
+    public static String findRelativeURL(String filePath) {
         return findRelativeURL(new File(filePath));
     }
 

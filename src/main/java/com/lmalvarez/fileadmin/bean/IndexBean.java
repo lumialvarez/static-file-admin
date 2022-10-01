@@ -29,7 +29,6 @@ import org.primefaces.model.StreamedContent;
 import org.primefaces.model.file.UploadedFile;
 
 /**
- *
  * @author lmalvarez
  */
 @Named
@@ -52,41 +51,41 @@ public class IndexBean implements Serializable {
         user = new User();
     }
 
-    public void onPageLoad(){
-        if(tokenParam != null && !tokenParam.isEmpty() && !tokenParam.equalsIgnoreCase(user.getToken())) {
+    public void onPageLoad() {
+        if (tokenParam != null && !tokenParam.isEmpty() && !tokenParam.equalsIgnoreCase(user.getToken())) {
             user = Session.checkToken(tokenParam);
-            if(!user.isLogged()){
-                showWarn("Token invalido");
+            if (!user.isLogged()) {
+                showWarn("Sesion invalida");
             }
         }
-        if(!user.isLogged()){
+        if (!user.isLogged()) {
             showWarn("Contenido no permitido");
         }
     }
 
-    public boolean isCarpetaPrincipal(){
+    public boolean isCarpetaPrincipal() {
         return Utils.isRootPath(currentPath);
     }
 
-    public String getRutaRelativa(){
+    public String getRutaRelativa() {
         String ruta = Utils.findRelativeURL(currentPath);
-        return ruta.isEmpty()? FileSystems.getDefault().getSeparator() : ruta;
+        return ruta.isEmpty() ? FileSystems.getDefault().getSeparator() : ruta;
     }
 
-    public void cargarRuta(String path){
+    public void cargarRuta(String path) {
         currentPath = path;
         list = Utils.readFolder(currentPath);
     }
 
-    public void cargarRutaAtras(){
-        if(!Utils.isRootPath(currentPath)) {
+    public void cargarRutaAtras() {
+        if (!Utils.isRootPath(currentPath)) {
             currentPath = Utils.findParentPath(currentPath);
             list = Utils.readFolder(currentPath);
         }
     }
 
-    public void eliminarArchivo(FileItem fileItem){
-        if(fileItem.isFolder() && fileItem.getSize() > 0){
+    public void eliminarArchivo(FileItem fileItem) {
+        if (fileItem.isFolder() && fileItem.getSize() > 0) {
             showWarn("La carpeta contiene archivos, no puede ser eliminada");
         } else {
             boolean eliminado = Utils.deleteFile(fileItem.getAbsolutePath());
@@ -99,10 +98,10 @@ public class IndexBean implements Serializable {
         }
     }
 
-    public void nuevaCarpeta(String folder){
+    public void nuevaCarpeta(String folder) {
         String filePath = currentPath + FileSystems.getDefault().getSeparator() + folder;
         boolean created = Utils.createFolder(filePath);
-        if(created){
+        if (created) {
             nameNewFolder = "";
             showInfo("Carpeta '" + folder + "' creada correctamente");
             try {
@@ -117,12 +116,12 @@ public class IndexBean implements Serializable {
         cargarRuta(currentPath);
     }
 
-    public void seleccionarArchivo(FileItem file){
+    public void seleccionarArchivo(FileItem file) {
         currentFile = file;
     }
 
     public void handleFilesUpload(FileUploadEvent event) {
-        UploadedFile file  = event.getFile();
+        UploadedFile file = event.getFile();
         try {
             Utils.createFile(currentPath, file.getFileName(), file.getInputStream());
             list = Utils.readFolder(currentPath);

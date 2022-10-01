@@ -4,7 +4,7 @@
 
     <groupId>com.lmalvarez</groupId>
     <artifactId>static-file-admin</artifactId>
-    <version>1.2.1</version>
+    <version>1.2.2</version>
     <packaging>war</packaging>
 
     <name>static-file-admin</name>
