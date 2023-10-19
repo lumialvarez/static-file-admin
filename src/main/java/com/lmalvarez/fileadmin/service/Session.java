@@ -16,9 +16,7 @@ public class Session {
                     "    \"token\": \"" + token + "\"" +
                     "}";
             request.setContent(body);
-
             request.setContentType("application/json");
-
             Response response =Rest.post(request);
             if (response.getStatus() == 200) {
                 JSONObject json = new JSONObject(response.getContent());
