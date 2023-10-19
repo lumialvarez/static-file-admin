@@ -56,6 +56,8 @@ public class IndexBean implements Serializable {
             user = Session.checkToken(tokenParam);
             if (!user.isLogged()) {
                 showWarn("Sesion invalida");
+            } else {
+                showInfo("Loggeado como " + user.getUser());
             }
         }
         if (!user.isLogged()) {
