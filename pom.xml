@@ -4,7 +4,7 @@
 
     <groupId>com.lmalvarez</groupId>
     <artifactId>static-file-admin</artifactId>
-    <version>1.2.2</version>
+    <version>1.2.3</version>
     <packaging>war</packaging>
 
     <name>static-file-admin</name>
@@ -109,14 +109,16 @@
 
     <repositories>
         <repository>
-            <id>github_tools</id>
-            <name>GitHub OWNER Apache Maven Packages</name>
-            <url>https://maven.pkg.github.com/lumialvarez/tools</url>
-        </repository>
-        <repository>
             <id>central</id>
             <name>Maven Plugin Repository</name>
             <url>https://repo1.maven.org/maven2</url>
+        </repository>
+        <repository>
+            <id>github</id>
+            <name>GitHub lumialvarez Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/lumialvarez/tools</url>
+            <releases><enabled>true</enabled></releases>
+            <snapshots><enabled>true</enabled></snapshots>
         </repository>
     </repositories>
 

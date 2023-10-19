@@ -6,6 +6,11 @@ Static files manager
 - Manual authentication
 - Dynamic configurations
 
+## [1.2.3] - 19/10/2023
+### Fixed
+- Change of session check endpoint
+- Maven repository order
+
 ## [1.2.2] - 30/09/2022
 ### Fixed
 - Change of session check endpoint
